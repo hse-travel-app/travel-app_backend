@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.sights.StreetRepository">
+
+    <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Street">
+        INSERT INTO streets (name, type, x_coordinate, y_coordinate, description, site_link, open_time, close_time, price, history)
+        VALUES (#{name}, #{type}, #{coordinateX}, #{coordinateY}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price}, #{history})
+    </insert>
+
+    <select id="findAll" resultMap="StreetMap">
+        SELECT *
+        FROM streets
+    </select>
+
+    <select id="findById" resultMap="StreetMap">
+        SELECT *
+        FROM streets
+        WHERE streets.id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="StreetMap">
+        SELECT *
+        FROM streets
+        WHERE streets.name = #{name}
+    </select>
+
+    <select id="findByDistance" resultMap="StreetMap">
+        SELECT *
+        FROM streets
+        <![CDATA[
+        WHERE (streets.x_coordinate - #{x})*(streets.x_coordinate - #{x}) + (streets.y_coordinate - #{y})*(streets.y_coordinate - #{y}) <= #{distance}*#{distance}
+        ]]>
+    </select>
+
+    <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Street">
+        UPDATE streets
+        SET NAME        = #{name},
+            TYPE        = #{type},
+            X_COORDINATE = #{coordinateX},
+            Y_COORDINATE = #{coordinateY},
+            DESCRIPTION = #{description},
+            SITE_LINK = #{siteLink},
+            OPEN_TIME = #{openTime},
+            CLOSE_TIME = #{closeTime},
+            PRICE = #{price},
+            HISTORY = #{history}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM streets
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM streets
+    </delete>
+
+    <resultMap id="StreetMap" type="tinkoff.tourism.model.sights.Street">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="coordinateX" column="x_coordinate"/>
+        <result property="coordinateY" column="y_coordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="site_link"/>
+        <result property="openTime" column="open_time"/>
+        <result property="closeTime" column="close_time"/>
+        <result property="price" column="price"/>
+        <result property="history" column="history"/>
+    </resultMap>
+
+</mapper>

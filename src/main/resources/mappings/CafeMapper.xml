@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.sights.CafeRepository">
+
+    <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Cafe">
+        INSERT INTO cafes (name, type, x_coordinate, y_coordinate, description, site_link, open_time, close_time, price, food_type)
+        VALUES (#{name}, #{type}, #{coordinateX}, #{coordinateY}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price}, #{foodType})
+    </insert>
+
+    <select id="findAll" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+    </select>
+
+    <select id="findById" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+        WHERE cafes.id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+        WHERE cafes.name = #{name}
+    </select>
+
+    <select id="findByDistance" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+        <![CDATA[
+        WHERE (cafes.x_coordinate - #{x})*(cafes.x_coordinate - #{x}) + (cafes.y_coordinate - #{y})*(cafes.y_coordinate - #{y}) <= #{distance}*#{distance}
+        ]]>
+    </select>
+
+    <select id="findByTypeOfFood" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+        WHERE cafes.food_type = #{foodType}
+    </select>
+
+    <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Cafe">
+        UPDATE cafes
+        SET NAME        = #{name},
+            TYPE        = #{type},
+            X_COORDINATE = #{coordinateX},
+            Y_COORDINATE = #{coordinateY},
+            DESCRIPTION = #{description},
+            SITE_LINK = #{siteLink},
+            OPEN_TIME = #{openTime},
+            CLOSE_TIME = #{closeTime},
+            PRICE = #{price},
+            FOOD_TYPE = #{foodType}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM cafes
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM cafes
+    </delete>
+
+    <resultMap id="CafeMap" type="tinkoff.tourism.model.sights.Cafe">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="coordinateX" column="x_coordinate"/>
+        <result property="coordinateY" column="y_coordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="site_link"/>
+        <result property="openTime" column="open_time"/>
+        <result property="closeTime" column="close_time"/>
+        <result property="price" column="price"/>
+        <result property="foodType" column="food_type"/>
+    </resultMap>
+
+</mapper>

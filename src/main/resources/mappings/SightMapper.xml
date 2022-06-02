@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.sights.SightRepository">
+
+    <select id="findAll" resultMap="SightMap">
+        SELECT *
+        FROM sights
+    </select>
+
+    <select id="findById" resultMap="SightMap">
+        SELECT *
+        FROM sights
+        WHERE sights.id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="SightMap">
+        SELECT *
+        FROM sights
+        WHERE sights.name = #{name}
+    </select>
+
+    <select id="findByDistance" resultMap="SightMap">
+        SELECT *
+        FROM sights
+        <![CDATA[
+        WHERE (sights.x_coordinate - #{x})*(sights.x_coordinate - #{x}) + (sights.y_coordinate - #{y})*(sights.y_coordinate - #{y}) <= #{distance}*#{distance}
+        ]]>
+    </select>
+
+    <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Sight">
+        UPDATE sights
+        SET NAME        = #{name},
+            TYPE        = #{type},
+            X_COORDINATE = #{coordinateX},
+            Y_COORDINATE = #{coordinateY},
+            DESCRIPTION = #{description},
+            SITE_LINK = #{siteLink},
+            OPEN_TIME = #{openTime},
+            CLOSE_TIME = #{closeTime},
+            PRICE = #{price},
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM sights
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM sights
+    </delete>
+
+    <resultMap id="SightMap" type="tinkoff.tourism.model.sights.Sight">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="coordinateX" column="x_coordinate"/>
+        <result property="coordinateY" column="y_coordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="site_link"/>
+        <result property="openTime" column="open_time"/>
+        <result property="closeTime" column="close_time"/>
+        <result property="price" column="price"/>
+    </resultMap>
+</mapper>

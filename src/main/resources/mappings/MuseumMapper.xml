@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.sights.MuseumRepository">
+
+    <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Museum">
+        INSERT INTO museums (name, type, x_coordinate, y_coordinate, description, site_link, open_time, close_time, price, discount_for_children)
+        VALUES (#{name}, #{type}, #{coordinateX}, #{coordinateY}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price}, #{discountForChildren})
+    </insert>
+
+    <select id="findAll" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+    </select>
+
+    <select id="findById" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+        WHERE museums.id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+        WHERE museums.name = #{name}
+    </select>
+
+    <select id="findByDistance" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+        <![CDATA[
+        WHERE (museums.x_coordinate - #{x})*(museums.x_coordinate - #{x}) + (museums.y_coordinate - #{y})*(museums.y_coordinate - #{y}) <= #{distance}*#{distance}
+        ]]>
+    </select>
+
+    <select id="findByDiscountForChildren" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+        WHERE museums.discount_for_children = #{discountForChildren}
+    </select>
+
+    <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Museum">
+        UPDATE museums
+        SET NAME        = #{name},
+            TYPE        = #{type},
+            X_COORDINATE = #{coordinateX},
+            Y_COORDINATE = #{coordinateY},
+            DESCRIPTION = #{description},
+            SITE_LINK = #{siteLink},
+            OPEN_TIME = #{openTime},
+            CLOSE_TIME = #{closeTime},
+            PRICE = #{price},
+            DISCOUNT_FOR_CHILDREN = #{discountForChildren}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM museums
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM museums
+    </delete>
+
+    <resultMap id="MuseumMap" type="tinkoff.tourism.model.sights.Museum">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="coordinateX" column="x_coordinate"/>
+        <result property="coordinateY" column="y_coordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="site_link"/>
+        <result property="openTime" column="open_time"/>
+        <result property="closeTime" column="close_time"/>
+        <result property="price" column="price"/>
+        <result property="discountForChildren" column="discount_for_children"/>
+    </resultMap>
+
+</mapper>
