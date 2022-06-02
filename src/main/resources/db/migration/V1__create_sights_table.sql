@@ -1,11 +1,11 @@
 CREATE TABLE sights
 (
     id          SERIAL PRIMARY KEY,
-    name        VARCHAR(64) NOT NULL,
+    name        VARCHAR(256) NOT NULL,
     xCoordinate FLOAT NOT NULL,
     yCoordinate FLOAT NOT NULL,
     description VARCHAR(256) NOT NULL,
-    siteLink    VARCHAR(64),
+    siteLink    VARCHAR(256),
     openTime    VARCHAR(64),
     closeTime   VARCHAR(64),
     price       INT
