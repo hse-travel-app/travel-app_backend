@@ -28,5 +28,5 @@ CREATE TABLE museums
 
 CREATE TABLE streets
 (
-    history VARCHAR(64) NOT NULL
+    history VARCHAR(512) NOT NULL
 ) INHERITS (sights);
