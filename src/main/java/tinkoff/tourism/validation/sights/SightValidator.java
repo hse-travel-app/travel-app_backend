@@ -13,7 +13,7 @@ import tinkoff.tourism.model.sights.Sight;
 public class SightValidator implements ConstraintValidator<SightConstraint, Sight> {
 
     private final Pattern validHours = Pattern.compile("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$");
-    private  final Pattern validURL = Pattern.compile("^(https?|ftp)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+    private  final Pattern validURL = Pattern.compile("^(https?|ftp)://[-a-zA-Zа-яА-Я0-9+&@#/%?=~_|!:,.;]*[-a-zA-Zа-яА-Я0-9+&@#/%=~_|]");
 
     @Override
     public boolean isValid(Sight sight, ConstraintValidatorContext constraintValidatorContext) {
