@@ -1,9 +1,9 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.sights.Bar;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import tinkoff.tourism.model.sights.Bar;
 
 
 public class BarValidator implements ConstraintValidator<BarConstraint, Bar> {

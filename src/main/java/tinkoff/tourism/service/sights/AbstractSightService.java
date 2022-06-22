@@ -1,11 +1,11 @@
 package tinkoff.tourism.service.sights;
 
-import java.util.List;
-
 import tinkoff.tourism.dao.sights.GenericRepository;
 import tinkoff.tourism.model.sights.Sight;
 
-public abstract class AbstractSightService<T extends Sight, R extends GenericRepository<T>> implements GenericSightService<T> {
+import java.util.List;
+
+public abstract class AbstractSightService <T extends Sight, R extends GenericRepository<T>> implements GenericSightService<T> {
     protected final R repository;
 
     public AbstractSightService(R repository) {

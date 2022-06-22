@@ -1,12 +1,12 @@
 package tinkoff.tourism.dao.sights;
 
-import java.util.List;
-
 import org.springframework.data.repository.NoRepositoryBean;
 import tinkoff.tourism.model.sights.Sight;
 
+import java.util.List;
+
 @NoRepositoryBean
-public interface GenericRepository<T extends Sight> {
+public interface GenericRepository <T extends Sight> {
 
     void addSight(T sight);
 

@@ -1,7 +1,5 @@
 package tinkoff.tourism.model;
 
-import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +9,9 @@ import tinkoff.tourism.model.sights.Cafe;
 import tinkoff.tourism.service.sights.CafeService;
 import tinkoff.tourism.service.sights.SightService;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @AutoConfigureMockMvc
 public class CafeServiceTest extends AbstractTest {

@@ -26,22 +26,23 @@
         SELECT *
         FROM sights
         <![CDATA[
-        WHERE (sights.x_coordinate - #{x})*(sights.x_coordinate - #{x}) + (sights.y_coordinate - #{y})*(sights.y_coordinate - #{y}) <= #{distance}*#{distance}
+        WHERE (sights.x_coordinate - #{x}) * (sights.x_coordinate - #{x}) +
+              (sights.y_coordinate - #{y}) * (sights.y_coordinate - #{y}) <= #{distance} * #{distance}
         ]]>
     </select>
 
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Sight">
         UPDATE sights
-        SET NAME        = #{name},
-            TYPE        = #{type},
+        SET NAME         = #{name},
+            TYPE         = #{type},
             X_COORDINATE = #{coordinateX},
             Y_COORDINATE = #{coordinateY},
-            DESCRIPTION = #{description},
-            SITE_LINK = #{siteLink},
-            OPEN_TIME = #{openTime},
-            CLOSE_TIME = #{closeTime},
-            PRICE = #{price},
-        WHERE ID = #{id}
+            DESCRIPTION  = #{description},
+            SITE_LINK    = #{siteLink},
+            OPEN_TIME    = #{openTime},
+            CLOSE_TIME   = #{closeTime},
+            PRICE        = #{price},
+            WHERE ID = #{id}
     </update>
 
     <delete id="delete" parameterType="java.lang.Long">

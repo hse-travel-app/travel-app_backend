@@ -1,10 +1,10 @@
 package tinkoff.tourism.service.sights;
 
-import java.util.List;
-
 import tinkoff.tourism.model.sights.Sight;
 
-public interface GenericSightService<T extends Sight>{
+import java.util.List;
+
+public interface GenericSightService <T extends Sight> {
 
     void addSight(T sight);
 

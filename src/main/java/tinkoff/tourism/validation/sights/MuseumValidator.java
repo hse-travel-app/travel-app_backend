@@ -1,9 +1,9 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.sights.Museum;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import tinkoff.tourism.model.sights.Museum;
 
 
 public class MuseumValidator implements ConstraintValidator<MuseumConstraint, Museum> {

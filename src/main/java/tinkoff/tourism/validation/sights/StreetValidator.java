@@ -1,9 +1,9 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.sights.Street;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import tinkoff.tourism.model.sights.Street;
 
 
 public class StreetValidator implements ConstraintValidator<StreetConstraint, Street> {

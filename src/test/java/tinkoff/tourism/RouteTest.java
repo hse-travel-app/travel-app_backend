@@ -1,7 +1,5 @@
 package tinkoff.tourism;
 
-import java.util.List;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,6 +17,8 @@ import tinkoff.tourism.dao.sights.SightRepository;
 import tinkoff.tourism.model.sights.Cafe;
 import tinkoff.tourism.model.sights.Museum;
 import tinkoff.tourism.model.sights.Sight;
+
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -144,7 +144,7 @@ public class RouteTest extends AbstractTest {
                 .build();
     }
 
-    private Sight proxySight(Sight sight){
+    private Sight proxySight(Sight sight) {
         return Sight.builder()
                 .id(sight.getId())
                 .name(sight.getName())
@@ -159,7 +159,7 @@ public class RouteTest extends AbstractTest {
                 .build();
     }
 
-    private RouteRequest createRequest(List<String> categories, String startTime, Integer budget){
+    private RouteRequest createRequest(List<String> categories, String startTime, Integer budget) {
         return RouteRequest.builder()
                 .categories(categories)
                 .startTime(startTime)

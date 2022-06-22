@@ -1,9 +1,9 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.sights.Cafe;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import tinkoff.tourism.model.sights.Cafe;
 
 
 public class CafeValidator implements ConstraintValidator<CafeConstraint, Cafe> {

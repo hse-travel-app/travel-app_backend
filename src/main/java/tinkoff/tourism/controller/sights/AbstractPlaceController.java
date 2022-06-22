@@ -1,20 +1,15 @@
 package tinkoff.tourism.controller.sights;
 
-import java.util.List;
-import javax.validation.Valid;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import tinkoff.tourism.model.sights.Sight;
 import tinkoff.tourism.service.sights.GenericSightService;
 
+import javax.validation.Valid;
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-public abstract class AbstractPlaceController<T extends Sight, S extends GenericSightService<T>> implements GenericPlaceController<T> {
+public abstract class AbstractPlaceController <T extends Sight, S extends GenericSightService<T>> implements GenericPlaceController<T> {
     protected final S service;
 
     public AbstractPlaceController(S service) {

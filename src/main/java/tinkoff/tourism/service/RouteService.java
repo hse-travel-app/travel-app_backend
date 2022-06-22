@@ -1,11 +1,11 @@
 package tinkoff.tourism.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import tinkoff.tourism.controller.dto.RouteRequest;
 import tinkoff.tourism.dao.RouteRepository;
 import tinkoff.tourism.model.sights.Sight;
+
+import java.util.List;
 
 @Service
 public class RouteService {

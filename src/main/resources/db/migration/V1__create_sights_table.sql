@@ -2,8 +2,8 @@ CREATE TABLE sights
 (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(256) NOT NULL,
-    xCoordinate FLOAT NOT NULL,
-    yCoordinate FLOAT NOT NULL,
+    xCoordinate FLOAT        NOT NULL,
+    yCoordinate FLOAT        NOT NULL,
     description VARCHAR(256) NOT NULL,
     siteLink    VARCHAR(256),
     openTime    VARCHAR(64),
@@ -13,7 +13,7 @@ CREATE TABLE sights
 
 CREATE TABLE bars
 (
-    forAdults       BOOL NOT NULL
+    forAdults BOOL NOT NULL
 ) INHERITS (sights);
 
 CREATE TABLE cafes

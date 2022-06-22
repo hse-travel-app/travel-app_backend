@@ -1,11 +1,11 @@
 package tinkoff.tourism.validation;
 
-import java.util.Objects;
-import java.util.regex.Pattern;
+import tinkoff.tourism.controller.dto.RouteRequest;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import tinkoff.tourism.controller.dto.RouteRequest;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 
 public class RouteRequestValidator implements ConstraintValidator<RouteRequestConstraint, RouteRequest> {

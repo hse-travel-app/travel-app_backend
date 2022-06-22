@@ -13,9 +13,9 @@
               sights.open_time <= #{endTime} AND sights.close_time >= #{startTime} AND
             sights.type IN
         ]]>
-            <foreach item="item" index="index" collection="categories" open="(" separator="," close=")">
+        <foreach item="item" index="index" collection="categories" open="(" separator="," close=")">
             #{item}
-            </foreach>
+        </foreach>
         ORDER BY sights.open_time, sights.close_time
     </select>
 

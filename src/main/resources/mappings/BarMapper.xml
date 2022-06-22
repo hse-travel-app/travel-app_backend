@@ -6,8 +6,10 @@
 <mapper namespace="tinkoff.tourism.dao.sights.BarRepository">
 
     <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Bar">
-        INSERT INTO bars (name, type, x_coordinate, y_coordinate, description, site_link, open_time, close_time, price, for_adults)
-        VALUES (#{name}, #{type}, #{coordinateX}, #{coordinateY}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price}, #{forAdults})
+        INSERT INTO bars (name, type, x_coordinate, y_coordinate, description, site_link, open_time, close_time, price,
+                          for_adults)
+        VALUES (#{name}, #{type}, #{coordinateX}, #{coordinateY}, #{description}, #{siteLink}, #{openTime},
+                #{closeTime}, #{price}, #{forAdults})
     </insert>
 
     <select id="findAll" resultMap="BarMap">
@@ -31,7 +33,8 @@
         SELECT *
         FROM bars
         <![CDATA[
-        WHERE (bars.x_coordinate - #{x})*(bars.x_coordinate - #{x}) + (bars.y_coordinate - #{y})*(bars.y_coordinate - #{y}) <= #{distance}*#{distance}
+        WHERE (bars.x_coordinate - #{x}) * (bars.x_coordinate - #{x}) +
+              (bars.y_coordinate - #{y}) * (bars.y_coordinate - #{y}) <= #{distance} * #{distance}
         ]]>
     </select>
 
@@ -43,16 +46,16 @@
 
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Bar">
         UPDATE bars
-        SET NAME        = #{name},
-            TYPE        = #{type},
+        SET NAME         = #{name},
+            TYPE         = #{type},
             X_COORDINATE = #{coordinateX},
             Y_COORDINATE = #{coordinateY},
-            DESCRIPTION = #{description},
-            SITE_LINK = #{siteLink},
-            OPEN_TIME = #{openTime},
-            CLOSE_TIME = #{closeTime},
-            PRICE = #{price},
-            FOR_ADULTS = #{forAdults}
+            DESCRIPTION  = #{description},
+            SITE_LINK    = #{siteLink},
+            OPEN_TIME    = #{openTime},
+            CLOSE_TIME   = #{closeTime},
+            PRICE        = #{price},
+            FOR_ADULTS   = #{forAdults}
         WHERE ID = #{id}
     </update>
 

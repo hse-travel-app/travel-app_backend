@@ -28,30 +28,29 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and()
-            .authorizeRequests()
-            .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger/**", "/swagger*").permitAll()
-            .antMatchers(HttpMethod.GET).hasAnyRole("ADMIN", "USER")
-            .antMatchers(HttpMethod.POST).hasRole("ADMIN")
-            .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
-            .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-            .and().authorizeRequests().anyRequest().authenticated()
-            .and().csrf().disable();
+                .authorizeRequests()
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger/**", "/swagger*").permitAll()
+                .antMatchers(HttpMethod.GET).hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+                .and().authorizeRequests().anyRequest().authenticated()
+                .and().csrf().disable();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authentication)
-            throws Exception
-    {
+            throws Exception {
         PasswordEncoder encoder =
                 PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
         authentication.inMemoryAuthentication()
                 .withUser(userName)
-                    .password(encoder.encode(userPassword))
-                    .authorities("ROLE_USER")
+                .password(encoder.encode(userPassword))
+                .authorities("ROLE_USER")
                 .and()
                 .withUser(adminName)
-                    .password(encoder.encode(adminPassword))
-                    .authorities("ROLE_ADMIN");
+                .password(encoder.encode(adminPassword))
+                .authorities("ROLE_ADMIN");
     }
 }
