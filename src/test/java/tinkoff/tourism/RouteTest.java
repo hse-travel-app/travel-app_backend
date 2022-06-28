@@ -14,6 +14,7 @@ import tinkoff.tourism.controller.dto.RouteRequest;
 import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.MuseumRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
+import tinkoff.tourism.model.enums.TypeEnum;
 import tinkoff.tourism.model.sights.Cafe;
 import tinkoff.tourism.model.sights.Museum;
 import tinkoff.tourism.model.sights.Sight;
@@ -62,7 +63,7 @@ public class RouteTest extends AbstractTest {
 
     @Test
     public void getRouteCafeSuccess() throws Exception {
-        RouteRequest request = createRequest(List.of("cafe"), "09:00", 1000);
+        RouteRequest request = createRequest(List.of(TypeEnum.CAFE), "09:00", 1000);
 
         mockMvc.perform(
                         get("/route")
@@ -75,7 +76,7 @@ public class RouteTest extends AbstractTest {
 
     @Test
     public void getRouteBothSuccess() throws Exception {
-        RouteRequest request = createRequest(List.of("cafe", "museum"), "09:00", 1000);
+        RouteRequest request = createRequest(List.of(TypeEnum.CAFE, TypeEnum.MUSEUM), "09:00", 1000);
 
         mockMvc.perform(
                         get("/route")
@@ -88,7 +89,7 @@ public class RouteTest extends AbstractTest {
 
     @Test
     public void getRouteBudgetSuccess() throws Exception {
-        RouteRequest request = createRequest(List.of("cafe", "museum"), "09:00", 100);
+        RouteRequest request = createRequest(List.of(TypeEnum.CAFE, TypeEnum.MUSEUM), "09:00", 100);
 
         mockMvc.perform(
                         get("/route")
@@ -101,7 +102,7 @@ public class RouteTest extends AbstractTest {
 
     @Test
     public void getRouteTimeSuccess() throws Exception {
-        RouteRequest request = createRequest(List.of("cafe", "museum"), "12:00", 1000);
+        RouteRequest request = createRequest(List.of(TypeEnum.CAFE, TypeEnum.MUSEUM), "12:00", 1000);
 
         mockMvc.perform(
                         get("/route")
@@ -159,7 +160,7 @@ public class RouteTest extends AbstractTest {
                 .build();
     }
 
-    private RouteRequest createRequest(List<String> categories, String startTime, Integer budget) {
+    private RouteRequest createRequest(List<TypeEnum> categories, String startTime, Integer budget) {
         return RouteRequest.builder()
                 .categories(categories)
                 .startTime(startTime)

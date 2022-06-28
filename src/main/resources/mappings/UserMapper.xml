@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.UserRepository">
+
+    <insert id="addUser" parameterType="tinkoff.tourism.model.User">
+        INSERT INTO users (name, login, password, authority)
+        VALUES (#{name}, #{login}, #{password}, #{authority});
+        INSERT INTO authorities (login, authority)
+        VALUES (#{login}, #{authority});
+    </insert>
+
+    <select id="findAll" resultMap="UserMap">
+        SELECT *
+        FROM users
+    </select>
+
+    <select id="findById" resultMap="UserMap">
+        SELECT *
+        FROM users
+        WHERE users.id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="UserMap">
+        SELECT *
+        FROM users
+        WHERE users.name = #{name}
+    </select>
+
+    <select id="findByLogin" resultMap="UserMap">
+        SELECT *
+        FROM users
+        WHERE users.login = #{login}
+    </select>
+
+    <select id="findByAuthority" resultMap="UserMap">
+        SELECT *
+        FROM users
+        WHERE users.authority = #{authority}
+    </select>
+
+    <update id="updateUser" parameterType="tinkoff.tourism.model.User">
+        UPDATE users
+        SET name      = #{name},
+            login     = #{login},
+            password  = #{password},
+            authority = #{authority}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM users
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM users
+    </delete>
+
+    <select id="isUserExists" parameterType="java.lang.String" resultMap="UserMap">
+        SELECT *
+        FROM users
+        WHERE users.login = #{login} LIMIT 1
+    </select>
+
+    <resultMap id="UserMap" type="tinkoff.tourism.model.User">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="login" column="login"/>
+        <result property="password" column="password"/>
+        <result property="authority" column="authority"/>
+    </resultMap>
+
+</mapper>

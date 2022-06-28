@@ -1,8 +1,8 @@
 package tinkoff.tourism.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import tinkoff.tourism.controller.dto.RouteRequest;
 import tinkoff.tourism.model.sights.Sight;
@@ -23,8 +23,9 @@ public class RouteController {
         this.service = service;
     }
 
-    @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public List<Sight> getRoute(@RequestBody @Valid RouteRequest request) {
+    @GetMapping(produces = APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Sight> getRoute(@Valid RouteRequest request) {
         if (request.getBudget() == null) request.setBudget(Integer.MAX_VALUE);
         if (request.getStartTime() == null) request.setStartTime("00:00");
         if (request.getEndTime() == null) request.setEndTime("23:59");
