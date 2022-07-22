@@ -1,5 +1,6 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.model.sights.Bar;
 
 import javax.validation.ConstraintValidator;
@@ -10,6 +11,8 @@ public class BarValidator implements ConstraintValidator<BarConstraint, Bar> {
 
     @Override
     public boolean isValid(Bar bar, ConstraintValidatorContext constraintValidatorContext) {
-        return bar != null && bar.getForAdults() != null;
+        return bar != null &&
+                bar.getForAdults() != null &&
+                bar.getType() == SightTypeEnum.BAR;
     }
 }

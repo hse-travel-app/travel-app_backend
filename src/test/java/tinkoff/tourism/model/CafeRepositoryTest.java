@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import tinkoff.tourism.AbstractTest;
 import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
+import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.model.sights.Cafe;
 
 import java.util.List;
@@ -84,7 +85,7 @@ public class CafeRepositoryTest extends AbstractTest {
         return Cafe.builder()
                 .id(1L)
                 .name(name)
-                .type("cafe")
+                .type(SightTypeEnum.CAFE)
                 .coordinateX(5.6)
                 .coordinateY(10.8)
                 .description("Nice cafe")

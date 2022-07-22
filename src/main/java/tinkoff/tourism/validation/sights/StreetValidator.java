@@ -1,5 +1,6 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.model.sights.Street;
 
 import javax.validation.ConstraintValidator;
@@ -11,6 +12,7 @@ public class StreetValidator implements ConstraintValidator<StreetConstraint, St
     @Override
     public boolean isValid(Street street, ConstraintValidatorContext constraintValidatorContext) {
         return street != null &&
-                street.getHistory() != null && !street.getHistory().isBlank();
+                street.getHistory() != null && !street.getHistory().isBlank() &&
+                street.getType() == SightTypeEnum.STREET;
     }
 }

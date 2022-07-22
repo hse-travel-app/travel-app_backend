@@ -2,6 +2,7 @@ package tinkoff.tourism.service;
 
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
+import tinkoff.tourism.controller.exception.UserAlreadyExistsException;
 import tinkoff.tourism.dao.UserRepository;
 import tinkoff.tourism.model.User;
 
@@ -15,12 +16,12 @@ public class UserService {
         this.repository = repository;
     }
 
-    public void addUser(User user) throws Exception {
+    public void addUser(User user) {
         if (repository.isUserExists(user.getLogin()) == null) {
             user.setPassword(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(user.getPassword()));
             repository.addUser(user);
         } else {
-            throw new Exception();
+            throw new UserAlreadyExistsException(String.format("User with login %s already exists", user.getLogin()));
         }
     }
 

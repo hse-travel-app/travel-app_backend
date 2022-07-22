@@ -1,5 +1,6 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.model.sights.Cafe;
 
 import javax.validation.ConstraintValidator;
@@ -11,6 +12,7 @@ public class CafeValidator implements ConstraintValidator<CafeConstraint, Cafe> 
     @Override
     public boolean isValid(Cafe cafe, ConstraintValidatorContext constraintValidatorContext) {
         return cafe != null &&
-                cafe.getFoodType() != null && !cafe.getFoodType().isBlank();
+                cafe.getFoodType() != null && !cafe.getFoodType().isBlank() &&
+                cafe.getType() == SightTypeEnum.CAFE;
     }
 }

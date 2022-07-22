@@ -8,8 +8,6 @@
     <insert id="addUser" parameterType="tinkoff.tourism.model.User">
         INSERT INTO users (name, login, password, authority)
         VALUES (#{name}, #{login}, #{password}, #{authority});
-        INSERT INTO authorities (login, authority)
-        VALUES (#{login}, #{authority});
     </insert>
 
     <select id="findAll" resultMap="UserMap">

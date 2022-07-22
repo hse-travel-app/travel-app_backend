@@ -10,6 +10,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import tinkoff.tourism.AbstractTest;
 import tinkoff.tourism.dao.sights.SightRepository;
+import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.model.sights.Cafe;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -34,7 +35,7 @@ public class CafeValidationTest extends AbstractTest {
 
     @Test
     public void addCafeSuccess() throws Exception {
-        Cafe cafe = createCafe("cafe", "https://www.baeldung.com", "10:30", 100);
+        Cafe cafe = createCafe(SightTypeEnum.CAFE, "https://www.baeldung.com", "10:30", 100);
         mockMvc.perform(
                         post("/cafe")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -45,7 +46,7 @@ public class CafeValidationTest extends AbstractTest {
 
     @Test
     public void addCafeNoSiteLinkSuccess() throws Exception {
-        Cafe cafe = createCafe("cafe", null, "10:30", 100);
+        Cafe cafe = createCafe(SightTypeEnum.CAFE, null, "10:30", 100);
         mockMvc.perform(
                         post("/cafe")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -56,7 +57,7 @@ public class CafeValidationTest extends AbstractTest {
 
     @Test
     public void addCafeBadTypeSuccess() throws Exception {
-        Cafe cafe = createCafe("cafe2", "https://www.baeldung.com", "10:30", 100);
+        Cafe cafe = createCafe(null, "https://www.baeldung.com", "10:30", 100);
         mockMvc.perform(
                         post("/cafe")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -67,7 +68,7 @@ public class CafeValidationTest extends AbstractTest {
 
     @Test
     public void addCafeBadTimeNotSuccess() throws Exception {
-        Cafe cafe = createCafe("cafe", "https://www.baeldung.com", "130:30", 100);
+        Cafe cafe = createCafe(SightTypeEnum.CAFE, "https://www.baeldung.com", "130:30", 100);
         mockMvc.perform(
                         post("/cafe")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -78,7 +79,7 @@ public class CafeValidationTest extends AbstractTest {
 
     @Test
     public void addCafeBadLinkNotSuccess() throws Exception {
-        Cafe cafe = createCafe("cafe", "Hello world", "10:30", 100);
+        Cafe cafe = createCafe(SightTypeEnum.CAFE, "Hello world", "10:30", 100);
         mockMvc.perform(
                         post("/cafe")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -89,7 +90,7 @@ public class CafeValidationTest extends AbstractTest {
 
     @Test
     public void addCafeBadPriceNotSuccess() throws Exception {
-        Cafe cafe = createCafe("cafe", "https://www.baeldung.com", "10:30", -100);
+        Cafe cafe = createCafe(SightTypeEnum.CAFE, "https://www.baeldung.com", "10:30", -100);
         mockMvc.perform(
                         post("/cafe")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -98,7 +99,7 @@ public class CafeValidationTest extends AbstractTest {
                 .andExpect(status().is4xxClientError());
     }
 
-    private Cafe createCafe(String type, String siteLink, String openTime, Integer price) {
+    private Cafe createCafe(SightTypeEnum type, String siteLink, String openTime, Integer price) {
         return Cafe.builder()
                 .id(1L)
                 .name("Stolovaya №1")

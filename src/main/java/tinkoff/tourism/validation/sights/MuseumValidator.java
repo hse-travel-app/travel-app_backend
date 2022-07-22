@@ -1,5 +1,6 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.model.sights.Museum;
 
 import javax.validation.ConstraintValidator;
@@ -10,6 +11,8 @@ public class MuseumValidator implements ConstraintValidator<MuseumConstraint, Mu
 
     @Override
     public boolean isValid(Museum museum, ConstraintValidatorContext constraintValidatorContext) {
-        return museum != null && museum.getDiscountForChildren() != null;
+        return museum != null &&
+                museum.getDiscountForChildren() != null &&
+                museum.getType() == SightTypeEnum.MUSEUM;
     }
 }

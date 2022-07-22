@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import tinkoff.tourism.AbstractTest;
+import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.model.sights.Cafe;
 import tinkoff.tourism.service.sights.CafeService;
 import tinkoff.tourism.service.sights.SightService;
@@ -85,7 +86,7 @@ public class CafeServiceTest extends AbstractTest {
         return Cafe.builder()
                 .id(1L)
                 .name(name)
-                .type("cafe")
+                .type(SightTypeEnum.CAFE)
                 .coordinateX(5.6)
                 .coordinateY(10.8)
                 .description("Nice cafe")

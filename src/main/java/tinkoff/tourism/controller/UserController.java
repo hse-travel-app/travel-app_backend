@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void addUser(@RequestBody @Valid User user) throws Exception {
+    public void addUser(@RequestBody @Valid User user) {
         service.addUser(user);
     }
 

@@ -27,8 +27,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
-                .defaultSuccessUrl("/swagger.html", true)
+        http.httpBasic()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger/**", "/swagger*").hasRole("ADMIN")
@@ -55,7 +54,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                                 "WHERE login = ?"
                 )
                 .authoritiesByUsernameQuery(
-                        "SELECT login, authority FROM authorities " +
+                        "SELECT login, authority FROM users " +
                                 "WHERE login = ?"
                 );
     }

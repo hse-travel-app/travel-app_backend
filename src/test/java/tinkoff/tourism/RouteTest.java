@@ -14,7 +14,7 @@ import tinkoff.tourism.controller.dto.RouteRequest;
 import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.MuseumRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
-import tinkoff.tourism.model.enums.TypeEnum;
+import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.model.sights.Cafe;
 import tinkoff.tourism.model.sights.Museum;
 import tinkoff.tourism.model.sights.Sight;
@@ -63,7 +63,7 @@ public class RouteTest extends AbstractTest {
 
     @Test
     public void getRouteCafeSuccess() throws Exception {
-        RouteRequest request = createRequest(List.of(TypeEnum.CAFE), "09:00", 1000);
+        RouteRequest request = createRequest(List.of(SightTypeEnum.CAFE), "09:00", 1000);
 
         mockMvc.perform(
                         get("/route")
@@ -76,7 +76,7 @@ public class RouteTest extends AbstractTest {
 
     @Test
     public void getRouteBothSuccess() throws Exception {
-        RouteRequest request = createRequest(List.of(TypeEnum.CAFE, TypeEnum.MUSEUM), "09:00", 1000);
+        RouteRequest request = createRequest(List.of(SightTypeEnum.CAFE, SightTypeEnum.MUSEUM), "09:00", 1000);
 
         mockMvc.perform(
                         get("/route")
@@ -89,7 +89,7 @@ public class RouteTest extends AbstractTest {
 
     @Test
     public void getRouteBudgetSuccess() throws Exception {
-        RouteRequest request = createRequest(List.of(TypeEnum.CAFE, TypeEnum.MUSEUM), "09:00", 100);
+        RouteRequest request = createRequest(List.of(SightTypeEnum.CAFE, SightTypeEnum.MUSEUM), "09:00", 100);
 
         mockMvc.perform(
                         get("/route")
@@ -102,7 +102,7 @@ public class RouteTest extends AbstractTest {
 
     @Test
     public void getRouteTimeSuccess() throws Exception {
-        RouteRequest request = createRequest(List.of(TypeEnum.CAFE, TypeEnum.MUSEUM), "12:00", 1000);
+        RouteRequest request = createRequest(List.of(SightTypeEnum.CAFE, SightTypeEnum.MUSEUM), "12:00", 1000);
 
         mockMvc.perform(
                         get("/route")
@@ -117,7 +117,7 @@ public class RouteTest extends AbstractTest {
         return Cafe.builder()
                 .id(1L)
                 .name(name)
-                .type("cafe")
+                .type(SightTypeEnum.CAFE)
                 .coordinateX(5.6)
                 .coordinateY(10.8)
                 .description("Nice cafe")
@@ -133,7 +133,7 @@ public class RouteTest extends AbstractTest {
         return Museum.builder()
                 .id(1L)
                 .name(name)
-                .type("museum")
+                .type(SightTypeEnum.MUSEUM)
                 .coordinateX(5.6)
                 .coordinateY(10.8)
                 .description("Nice Museum")
@@ -160,7 +160,7 @@ public class RouteTest extends AbstractTest {
                 .build();
     }
 
-    private RouteRequest createRequest(List<TypeEnum> categories, String startTime, Integer budget) {
+    private RouteRequest createRequest(List<SightTypeEnum> categories, String startTime, Integer budget) {
         return RouteRequest.builder()
                 .categories(categories)
                 .startTime(startTime)

@@ -39,12 +39,3 @@ CREATE TABLE users
     password  VARCHAR(128) NOT NULL,
     authority VARCHAR(64)  NOT NULL
 );
-
-CREATE TABLE authorities
-(
-    login     VARCHAR(64) NOT NULL UNIQUE,
-    authority VARCHAR(64) NOT NULL,
-    FOREIGN KEY (login) REFERENCES users (login)
-);
-
-CREATE UNIQUE INDEX ix_auth_login ON authorities (login, authority)
