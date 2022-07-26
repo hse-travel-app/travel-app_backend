@@ -42,4 +42,5 @@ docker-compose build && docker-compose up
 ```url
 http://localhost:8080/swagger.html
 ```
+
 При входе сервис потребует войти в систему, для этого можно использовать вышеупомянутую пару `admin:admin`

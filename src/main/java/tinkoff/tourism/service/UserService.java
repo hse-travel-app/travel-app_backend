@@ -17,7 +17,7 @@ public class UserService {
     }
 
     public void addUser(User user) {
-        if (repository.isUserExists(user.getLogin()) == null) {
+        if (!repository.isUserExists(user.getLogin())) {
             user.setPassword(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(user.getPassword()));
             repository.addUser(user);
         } else {
@@ -57,7 +57,7 @@ public class UserService {
         repository.deleteAll();
     }
 
-    public User isUserExists(String login) {
+    public Boolean isUserExists(String login) {
         return repository.isUserExists(login);
     }
 }

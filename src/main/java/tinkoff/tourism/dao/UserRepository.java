@@ -25,5 +25,5 @@ public interface UserRepository {
 
     void deleteAll();
 
-    User isUserExists(String login);
+    boolean isUserExists(String login);
 }

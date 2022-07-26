@@ -36,7 +36,7 @@ public class RouteService {
 
         int numberOfPlaces = request.getDuration().getPossibleNumberOfPlaces()[random.nextInt(request.getDuration().getPossibleNumberOfPlaces().length)];
 
-        // need to rewrite it naxren but idk how
+        // needs to be rewritten
         {
             Iterator<Map.Entry<SightTypeEnum, LinkedList<Sight>>> it = classifiedSights.entrySet().iterator();
             while (compressed.size() != numberOfPlaces &&
@@ -54,6 +54,32 @@ public class RouteService {
                 }
             }
         }
+
+        Sight firstPoint = compressed.get(0);
+        compressed.sort(new Comparator<>() {
+            @Override
+            public int compare(Sight left, Sight right) {
+                double distanceOne = distance(firstPoint, left);
+                double distanceTwo = distance(firstPoint, right);
+
+                return (int) (distanceOne - distanceTwo);
+            }
+
+            private double distance(Sight from, Sight to) {
+                int constEarthRadius = 6378137;
+                double deltaLat = from.getLatitude() - to.getLatitude();
+                double deltaLon = from.getLongitude() - to.getLongitude();
+                double angle = 2 * Math.asin(
+                        Math.pow(Math.sqrt(
+                                Math.pow(Math.sin(deltaLat / 2), 2) + Math.cos(from.getLatitude()) * Math.cos(to.getLatitude()) * Math.sin(
+                                        deltaLon / 2
+                                )), 2
+                        )
+                );
+
+                return constEarthRadius * angle;
+            }
+        });
 
         return compressed;
     }

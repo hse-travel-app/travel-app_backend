@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @GetMapping(value = "exists")
-    public User isUserExists(@RequestParam("login") String login) {
+    public Boolean isUserExists(@RequestParam("login") String login) {
         return service.isUserExists(login);
     }
 }

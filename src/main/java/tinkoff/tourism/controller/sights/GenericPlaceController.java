@@ -22,9 +22,6 @@ public interface GenericPlaceController <T extends Sight> {
     @GetMapping(value = "name", produces = APPLICATION_JSON_VALUE)
     List<T> getSightsByName(@RequestParam("name") String name);
 
-    @GetMapping(value = "distance", produces = APPLICATION_JSON_VALUE)
-    List<T> getSightsByDistance(@RequestParam("x") Double x, @RequestParam("y") Double y, @RequestParam("distance") Double distance);
-
     @PutMapping(consumes = APPLICATION_JSON_VALUE)
     void updateSight(@RequestBody @Valid T sight);
 

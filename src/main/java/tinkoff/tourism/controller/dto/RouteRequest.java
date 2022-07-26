@@ -10,8 +10,6 @@ import tinkoff.tourism.model.enums.DurationEnum;
 import tinkoff.tourism.model.enums.SightTypeEnum;
 import tinkoff.tourism.validation.RouteRequestConstraint;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;

@@ -6,9 +6,9 @@
 <mapper namespace="tinkoff.tourism.dao.sights.CafeRepository">
 
     <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Cafe">
-        INSERT INTO cafes (name, type, x_coordinate, y_coordinate, description, site_link, open_time, close_time, price,
+        INSERT INTO cafes (name, type, latitude, longitude, description, site_link, open_time, close_time, price,
                            food_type)
-        VALUES (#{name}, #{type}, #{coordinateX}, #{coordinateY}, #{description}, #{siteLink}, #{openTime},
+        VALUES (#{name}, #{type}, #{latitude}, #{longitude}, #{description}, #{siteLink}, #{openTime},
                 #{closeTime}, #{price}, #{foodType})
     </insert>
 
@@ -29,15 +29,6 @@
         WHERE cafes.name = #{name}
     </select>
 
-    <select id="findByDistance" resultMap="CafeMap">
-        SELECT *
-        FROM cafes
-        <![CDATA[
-        WHERE (cafes.x_coordinate - #{x}) * (cafes.x_coordinate - #{x}) +
-              (cafes.y_coordinate - #{y}) * (cafes.y_coordinate - #{y}) <= #{distance} * #{distance}
-        ]]>
-    </select>
-
     <select id="findByTypeOfFood" resultMap="CafeMap">
         SELECT *
         FROM cafes
@@ -46,16 +37,16 @@
 
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Cafe">
         UPDATE cafes
-        SET NAME         = #{name},
-            TYPE         = #{type},
-            X_COORDINATE = #{coordinateX},
-            Y_COORDINATE = #{coordinateY},
-            DESCRIPTION  = #{description},
-            SITE_LINK    = #{siteLink},
-            OPEN_TIME    = #{openTime},
-            CLOSE_TIME   = #{closeTime},
-            PRICE        = #{price},
-            FOOD_TYPE    = #{foodType}
+        SET NAME        = #{name},
+            TYPE        = #{type},
+            LATITUDE    = #{latitude},
+            LONGITUDE   = #{longitude},
+            DESCRIPTION = #{description},
+            SITE_LINK   = #{siteLink},
+            OPEN_TIME   = #{openTime},
+            CLOSE_TIME  = #{closeTime},
+            PRICE       = #{price},
+            FOOD_TYPE   = #{foodType}
         WHERE ID = #{id}
     </update>
 
@@ -74,8 +65,8 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <result property="coordinateX" column="x_coordinate"/>
-        <result property="coordinateY" column="y_coordinate"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
         <result property="description" column="description"/>
         <result property="siteLink" column="site_link"/>
         <result property="openTime" column="open_time"/>

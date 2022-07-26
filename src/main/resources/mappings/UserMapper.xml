@@ -59,10 +59,12 @@
         FROM users
     </delete>
 
-    <select id="isUserExists" parameterType="java.lang.String" resultMap="UserMap">
-        SELECT *
-        FROM users
-        WHERE users.login = #{login} LIMIT 1
+    <select id="isUserExists" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT EXISTS(
+                       SELECT *
+                       FROM users
+                       WHERE users.login = #{login} LIMIT 1
+                   ) AS result
     </select>
 
     <resultMap id="UserMap" type="tinkoff.tourism.model.User">

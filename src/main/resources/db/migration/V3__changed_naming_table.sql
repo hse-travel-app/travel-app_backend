@@ -1,5 +1,3 @@
-ALTER TABLE sights RENAME COLUMN xCoordinate TO x_coordinate;
-ALTER TABLE sights RENAME COLUMN yCoordinate TO y_coordinate;
 ALTER TABLE sights RENAME COLUMN siteLink TO site_link;
 ALTER TABLE sights RENAME COLUMN openTime TO open_time;
 ALTER TABLE sights RENAME COLUMN closeTime TO close_time;

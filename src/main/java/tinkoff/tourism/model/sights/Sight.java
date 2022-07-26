@@ -27,8 +27,8 @@ public class Sight {
     String name;
     @NotNull
     SightTypeEnum type;
-    Double coordinateX;
-    Double coordinateY;
+    Double latitude;
+    Double longitude;
     String description;
     String siteLink;
     String openTime;

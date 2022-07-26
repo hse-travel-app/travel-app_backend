@@ -34,11 +34,6 @@ public class SightController {
         return service.findByName(name);
     }
 
-    @GetMapping(value = "distance", produces = APPLICATION_JSON_VALUE)
-    public List<Sight> getSightsByDistance(@RequestParam("x") Double x, @RequestParam("y") Double y, @RequestParam("distance") Double distance) {
-        return service.findByDistance(x, y, distance);
-    }
-
     @PutMapping(consumes = APPLICATION_JSON_VALUE)
     public void updateSight(@RequestBody @Valid Sight sight) {
         service.updateSight(sight);

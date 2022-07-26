@@ -22,26 +22,17 @@
         WHERE sights.name = #{name}
     </select>
 
-    <select id="findByDistance" resultMap="SightMap">
-        SELECT *
-        FROM sights
-        <![CDATA[
-        WHERE (sights.x_coordinate - #{x}) * (sights.x_coordinate - #{x}) +
-              (sights.y_coordinate - #{y}) * (sights.y_coordinate - #{y}) <= #{distance} * #{distance}
-        ]]>
-    </select>
-
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Sight">
         UPDATE sights
-        SET NAME         = #{name},
-            TYPE         = #{type},
-            X_COORDINATE = #{coordinateX},
-            Y_COORDINATE = #{coordinateY},
-            DESCRIPTION  = #{description},
-            SITE_LINK    = #{siteLink},
-            OPEN_TIME    = #{openTime},
-            CLOSE_TIME   = #{closeTime},
-            PRICE        = #{price},
+        SET NAME        = #{name},
+            TYPE        = #{type},
+            LATITUDE    = #{latitude},
+            LONGITUDE   = #{longitude},
+            DESCRIPTION = #{description},
+            SITE_LINK   = #{siteLink},
+            OPEN_TIME   = #{openTime},
+            CLOSE_TIME  = #{closeTime},
+            PRICE       = #{price},
             WHERE ID = #{id}
     </update>
 
@@ -60,8 +51,8 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <result property="coordinateX" column="x_coordinate"/>
-        <result property="coordinateY" column="y_coordinate"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
         <result property="description" column="description"/>
         <result property="siteLink" column="site_link"/>
         <result property="openTime" column="open_time"/>

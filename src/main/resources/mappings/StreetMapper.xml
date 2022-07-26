@@ -6,9 +6,9 @@
 <mapper namespace="tinkoff.tourism.dao.sights.StreetRepository">
 
     <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Street">
-        INSERT INTO streets (name, type, x_coordinate, y_coordinate, description, site_link, open_time, close_time,
+        INSERT INTO streets (name, type, latitude, longitude, description, site_link, open_time, close_time,
                              price, history)
-        VALUES (#{name}, #{type}, #{coordinateX}, #{coordinateY}, #{description}, #{siteLink}, #{openTime},
+        VALUES (#{name}, #{type}, #{latitude}, #{longitude}, #{description}, #{siteLink}, #{openTime},
                 #{closeTime}, #{price}, #{history})
     </insert>
 
@@ -29,27 +29,18 @@
         WHERE streets.name = #{name}
     </select>
 
-    <select id="findByDistance" resultMap="StreetMap">
-        SELECT *
-        FROM streets
-        <![CDATA[
-        WHERE (streets.x_coordinate - #{x}) * (streets.x_coordinate - #{x}) +
-              (streets.y_coordinate - #{y}) * (streets.y_coordinate - #{y}) <= #{distance} * #{distance}
-        ]]>
-    </select>
-
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Street">
         UPDATE streets
-        SET NAME         = #{name},
-            TYPE         = #{type},
-            X_COORDINATE = #{coordinateX},
-            Y_COORDINATE = #{coordinateY},
-            DESCRIPTION  = #{description},
-            SITE_LINK    = #{siteLink},
-            OPEN_TIME    = #{openTime},
-            CLOSE_TIME   = #{closeTime},
-            PRICE        = #{price},
-            HISTORY      = #{history}
+        SET NAME        = #{name},
+            TYPE        = #{type},
+            LATITUDE    = #{latitude},
+            LONGITUDE   = #{longitude},
+            DESCRIPTION = #{description},
+            SITE_LINK   = #{siteLink},
+            OPEN_TIME   = #{openTime},
+            CLOSE_TIME  = #{closeTime},
+            PRICE       = #{price},
+            HISTORY     = #{history}
         WHERE ID = #{id}
     </update>
 
@@ -68,8 +59,8 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <result property="coordinateX" column="x_coordinate"/>
-        <result property="coordinateY" column="y_coordinate"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
         <result property="description" column="description"/>
         <result property="siteLink" column="site_link"/>
         <result property="openTime" column="open_time"/>

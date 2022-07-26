@@ -17,8 +17,8 @@ public class SightValidator implements ConstraintValidator<SightConstraint, Sigh
         return sight != null &&
                 sight.getName() != null && !sight.getName().isBlank() &&
                 sight.getType() != null &&
-                sight.getCoordinateX() != null && !sight.getCoordinateX().isInfinite() && !sight.getCoordinateX().isNaN() &&
-                sight.getCoordinateY() != null && !sight.getCoordinateY().isInfinite() && !sight.getCoordinateY().isNaN() &&
+                sight.getLatitude() != null && !sight.getLatitude().isInfinite() && !sight.getLatitude().isNaN() &&
+                sight.getLongitude() != null && !sight.getLongitude().isInfinite() && !sight.getLongitude().isNaN() &&
                 !sight.getDescription().isBlank() &&
                 (sight.getSiteLink() == null || validURL.matcher(sight.getSiteLink()).matches()) &&
                 sight.getOpenTime() != null && validHours.matcher(sight.getOpenTime()).matches() &&

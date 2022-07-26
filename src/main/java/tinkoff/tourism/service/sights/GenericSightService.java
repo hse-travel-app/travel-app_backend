@@ -18,7 +18,5 @@ public interface GenericSightService <T extends Sight> {
 
     List<T> findByName(String name);
 
-    List<T> findByDistance(Double x, Double y, Double distance);
-
     List<T> findAll();
 }

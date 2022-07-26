@@ -43,11 +43,6 @@ public abstract class AbstractSightService <T extends Sight, R extends GenericRe
     }
 
     @Override
-    public List<T> findByDistance(Double x, Double y, Double distance) {
-        return repository.findByDistance(x, y, distance);
-    }
-
-    @Override
     public List<T> findAll() {
         return repository.findAll();
     }

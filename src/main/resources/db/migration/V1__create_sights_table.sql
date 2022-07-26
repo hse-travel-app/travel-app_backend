@@ -2,8 +2,8 @@ CREATE TABLE sights
 (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(256) NOT NULL,
-    xCoordinate FLOAT        NOT NULL,
-    yCoordinate FLOAT        NOT NULL,
+    latitude    FLOAT        NOT NULL,
+    longitude   FLOAT        NOT NULL,
     description VARCHAR(256) NOT NULL,
     siteLink    VARCHAR(256),
     openTime    VARCHAR(64),
