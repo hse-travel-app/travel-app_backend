@@ -30,12 +30,12 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         http.httpBasic()
                 .and()
                 .authorizeRequests()
+                .antMatchers("/user/exists/**", "/user/auth/**").permitAll()
                 .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger/**", "/swagger*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET).hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST).hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-                .and().authorizeRequests().anyRequest().authenticated()
                 .and().csrf().disable();
     }
 

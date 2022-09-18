@@ -68,4 +68,9 @@ public class UserController {
     public Boolean isUserExists(@RequestParam("login") String login) {
         return service.isUserExists(login);
     }
+
+    @GetMapping(value = "auth")
+    public Boolean auth(@RequestParam("login") String login, @RequestParam("password") String password) {
+        return service.auth(login, password);
+    }
 }

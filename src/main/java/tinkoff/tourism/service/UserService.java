@@ -1,6 +1,7 @@
 package tinkoff.tourism.service;
 
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tinkoff.tourism.controller.exception.UserAlreadyExistsException;
 import tinkoff.tourism.dao.UserRepository;
@@ -12,13 +13,16 @@ import java.util.List;
 public class UserService {
     private final UserRepository repository;
 
+    private final PasswordEncoder encoder =
+            PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
     public UserService(UserRepository repository) {
         this.repository = repository;
     }
 
     public void addUser(User user) {
         if (!repository.isUserExists(user.getLogin())) {
-            user.setPassword(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(user.getPassword()));
+            user.setPassword(encoder.encode(user.getPassword()));
             repository.addUser(user);
         } else {
             throw new UserAlreadyExistsException(String.format("User with login %s already exists", user.getLogin()));
@@ -59,5 +63,11 @@ public class UserService {
 
     public Boolean isUserExists(String login) {
         return repository.isUserExists(login);
+    }
+
+    public Boolean auth(String login, String password) {
+        User requested = repository.findByLogin(login);
+        if (requested == null) return false;
+        return encoder.matches(password, requested.getPassword());
     }
 }
